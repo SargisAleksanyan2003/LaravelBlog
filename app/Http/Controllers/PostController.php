@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Symfony\Component\Translation\PseudoLocalizationTranslator;
@@ -12,7 +13,9 @@ class PostController extends Controller
     //
     public function index()
     {
-        $posts = Post::all();
+        $categories = Category::find(1);
+        $posts = Post::find(1);
+        dd($posts->category);
         return view('post.posts', compact('posts'));
     }
 
