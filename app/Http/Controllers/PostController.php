@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Symfony\Component\Translation\PseudoLocalizationTranslator;
+use \Cache;
 
 class PostController extends Controller
 {
@@ -36,54 +37,28 @@ class PostController extends Controller
         return view('post.show', compact('post'));
     }
 
-    public function update()
+    public function edit(Post $post)
     {
-        $post = Post::find(6);
-        echo '<pre>';
-        print_r($post);
-        echo '</pre>';
-
-        $post->update([
-            'text' => 'another some interesting content',
-            'image' => 'another some.jpg',
-            'likes' => 50,
-            'is_published' => 0,
-
-        ]);
-        dd($post->title);
+        return view('post.edit', compact('post'));
     }
 
-    public function delete()
+    public function update(Post $post)
     {
-        Post::find(6)->delete();
+        $data = \request()->validate([
+            'title' => 'string',
+            'text' => 'string',
+            'image' => 'string'
+        ]);
+        $post->update($data);
+        return view('post.show', compact('post'));
+
     }
 
-    public function firstOrCreate()
+    public function destroy(Post $post)
     {
+        Post::find($post->id)->delete();
+        return redirect()->route('post.index');
 
-        $myPost = Post::firstOrCreate([
-            'title' => 'another post from phpstorm',
-        ], [
-            'title' => 'another post from phpstorm',
-            'text' => 'another some interesting content',
-            'image' => 'another some.jpg',
-            'likes' => 50,
-            'is_published' => 1,
-        ]);
-        dd($myPost);
-    }
-
-    public function updateOrCreate()
-    {
-        $myPost = Post::updateOrCreate([
-            'title' => 'its not update post from phpstorm',
-        ], [
-            'title' => 'another not update post from phpstorm',
-            'text' => 'another some interesting content',
-            'image' => 'another some.jpg',
-            'likes' => 10,
-            'is_published' => 1,
-        ]);
     }
 }
 
