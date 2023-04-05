@@ -1,4 +1,9 @@
 @extends('layouts.main')
 @section('content')
-    this is contact page
+ <h1>
+     Это начальная страница,
+     <br>
+     потом будет красиво
+ </h1>
+ <a href="/posts">Посмотреть посты</a>
 @endsection
