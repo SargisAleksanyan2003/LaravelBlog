@@ -6,8 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\PostTag;
 use App\Models\Tag;
-use Illuminate\Http\Request;
-use Symfony\Component\Translation\PseudoLocalizationTranslator;
+
 use \Cache;
 
 class PostController extends Controller
@@ -15,8 +14,10 @@ class PostController extends Controller
     //
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::find(1);
+        $category = Category::find(1);
 
+       dd($posts->tags);
         return view('post.posts', compact('posts'));
     }
 
@@ -57,8 +58,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('post.edit', compact('post', 'categories'));
+        return view('post.edit', compact('post', 'categories','tags'));
     }
 
     public function update(Post $post)
@@ -67,10 +69,19 @@ class PostController extends Controller
             'title' => 'string',
             'text' => 'string',
             'image' => 'string',
-            'category_id' => ''
+            'category_id' => '',
+            'tags' =>''
 
         ]);
+       // dd($data);
+
+        $tags = $data['tags'];
+
+        unset($data['tags']);
+
         $post->update($data);
+        $post->tags()->sync($tags);
+
         return view('post.show', compact('post'));
     }
 
