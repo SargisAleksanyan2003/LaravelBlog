@@ -8,6 +8,10 @@ use App\Models\Category;
 
 class Post extends Model
 {
+    protected $guarded = false;
+
+
+
     use HasFactory;
 
     public function category(){

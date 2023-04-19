@@ -11,8 +11,8 @@
             </div>
             <div class="mb-3">
                 <label for="text" class="form-label">Text</label>
-                <textarea type="text" name="text" class="form-control" id="text" aria-describedby="Text">
-                    {{$post->text}}
+                <textarea type="text" name="content" class="form-control" id="text" aria-describedby="Text">
+                    {{$post->content}}
                 </textarea>
             </div>
             <div class="mb-3">

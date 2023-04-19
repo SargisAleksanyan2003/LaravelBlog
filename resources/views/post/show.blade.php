@@ -2,7 +2,7 @@
 @section('content')
     <div>
         <div>{{$post->id}}/{{$post->title}}</div>
-        <div> {{$post->text}} </div>
+        <div> {{$post->content}} </div>
     </div>
     <div>
         <a href="{{route('post.index')}}" class="btn btn-primary mt-2">Back</a>
@@ -12,7 +12,7 @@
         <form action="{{route('post.delete', $post->id)}}" method="post">
             @csrf
             @method('delete')
-            <input type="submit" value="delete">
+            <input class="btn btn-danger mt-2" type="submit" value="delete">
         </form>
     </div>
 @endsection

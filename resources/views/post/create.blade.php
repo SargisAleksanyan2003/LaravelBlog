@@ -14,7 +14,7 @@
 
             <div class="mb-3">
                 <label for="text" class="form-label">Text</label>
-                <textarea value="" type="text" name="text" class="form-control" id="text"
+                <textarea value="" type="text" name="content" class="form-control" id="text"
                           aria-describedby="Text">{{ old('text') }}</textarea>
                 @error('text')
                 <p class="text-danger">{{$message}}</p>
